@@ -1,7 +1,20 @@
-import { defineConfig } from "hardhat/config";
+import { config as dotenvConfig } from "dotenv";
+dotenvConfig();
 
-export default defineConfig({
-  solidity: {
-    version: "0.8.28",
+import "@nomiclabs/hardhat-ethers";
+import { HardhatUserConfig } from "hardhat/config";
+
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
+const RPC_URL = process.env.RPC_URL || "";
+
+const config: HardhatUserConfig = {
+  solidity: "0.8.20",
+  networks: {
+    sepolia: {
+      url: RPC_URL,
+      accounts: [PRIVATE_KEY],
+    },
   },
-});
+};
+
+export default config;

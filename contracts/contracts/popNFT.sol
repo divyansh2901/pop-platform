@@ -9,8 +9,9 @@ contract PopNFT is ERC721, Ownable {
 
     mapping(uint256 => string) private _tokenURIs;
 
-    constructor() ERC721("ProofOfParticipation", "POP") Ownable(msg.sender) {
+    constructor() ERC721("ProofOfParticipation", "POP") {
         tokenCounter = 0;
+        _transferOwnership(msg.sender); // ✅ set owner explicitly
     }
 
     function mintNFT(address user, string memory metadataURI) public onlyOwner {
